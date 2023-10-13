@@ -25,6 +25,17 @@ export const customController = {
         }
     },
 
+    getByIdByEntity: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const entity2 = req.params.entity2;
+            const response = await axios.get(`${req.url}${id}/${entity2}`);
+            res.status(201).json(response.data)
+        } catch (error) {
+            res.status(500).json(_status(false, true, error))
+        }
+    },
+
     create: async (req, res) => {
         try {
             const response = await axios.post(req.url, req.body);

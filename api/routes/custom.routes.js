@@ -25,6 +25,12 @@ router.get('/:entity/:id',
     customController.getById
 )
 
+router.get('/:entity/:id/:entity2',
+    checkCustomRoute,
+    validateToken,
+    customController.getByIdByEntity
+)
+
 router.post('/:entity',
     checkCustomRoute,
     // validateToken,
