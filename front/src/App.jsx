@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "/node_modules/primeflex/primeflex.css";
+
+import { SignIn } from "./pages/SignIn";
+import { Home } from "./pages/Home";
+import { SignUp } from "./pages/SignUp";
+import { Notes } from "./pages/Notes";
+import { Albums } from "./pages/Albums";
+import { Navigation } from "./components/Navigation";
+import axios from "axios";
+import { getToken } from "./services/auth.service";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Add a response interceptor
+  const navigate = useNavigate();
+  if (getToken() == "") {
+    navigate("/");
+  }
+  axios.interceptors.request.use(
+    function (response) {
 
+      return response;
+    },
+    function (error) {
+  
+      return Promise.reject(error);
+    }
+  );
+  axios.interceptors.response.use(
+    function (response) {
+      // Any status code that lie within the range of 2xx cause this function to trigger
+      // Do something with response data
+      // console.log(response);
+
+      return response;
+    },
+    function (error) {
+      // Any status codes that falls outside the range of 2xx cause this function to trigger
+      // Do something with response error
+      console.log(error);
+
+      if (error.response.data.message == "You should sign in again") {
+        localStorage.clear();
+        navigate("/");
+      }
+      return Promise.reject(error);
+    }
+  );
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <PrimeReactProvider>
+      <Navigation />
+      <Routes>
+        <Route path="/" exact element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/albums" element={<Albums />} />
+      </Routes>
+    </PrimeReactProvider>
+  );
 }
 
-export default App
+export default App;
