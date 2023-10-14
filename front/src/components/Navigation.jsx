@@ -1,31 +1,33 @@
 import { Avatar } from "primereact/avatar";
 import { Menu } from "primereact/menu";
 import { Menubar } from "primereact/menubar";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../services/auth.service";
 
 export const Navigation = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // if (getToken() == "") {
-    //   navigate("/");
-    // }
-  });
-
   const items = [
     {
-      label: "Notes",
+      label: "Tasks",
       icon: "pi pi-fw pi-file",
       items: [
         {
           label: "New",
           icon: "pi pi-fw pi-plus",
+          command: () => {
+            // e.preventDefault();
+            navigate("/notes/new");
+          },
         },
         {
-          label: "View my notes",
+          label: "View my tasks",
           icon: "pi pi-fw pi-folder-open",
+          command: () => {
+            // e.preventDefault();
+            navigate("/notes");
+          },
         },
       ],
     },
@@ -36,10 +38,18 @@ export const Navigation = () => {
         {
           label: "New",
           icon: "pi pi-fw pi-plus",
+          command: () => {
+            // e.preventDefault();
+            navigate("/albums/new");
+          },
         },
         {
           label: "View my albums",
           icon: "pi pi-fw pi-images",
+          command: () => {
+            // e.preventDefault();
+            navigate("/albums");
+          },
         },
       ],
     },
@@ -51,7 +61,10 @@ export const Navigation = () => {
         image="/imgs/ownydrive.jpg"
         size="xlarge"
         shape="circle"
-        // onClick={(event) => menuRight.current.toggle(event)}
+        onClick={(e) => {
+          navigate("/home");
+          e.preventDefault();
+        }}
       ></Avatar>
       {/* <h2>OwnyDrive</h2> */}
     </>
@@ -102,8 +115,9 @@ export const Navigation = () => {
         <div></div>
       ) : (
         <div className="card">
-          <Menubar model={items} start={start} end={end} />
+          <Menubar key={'menubar'} model={items} start={start} end={end} />
           <Menu
+            key={"menu"}
             model={itemsMenuProfile}
             popup
             ref={menuRight}
