@@ -77,7 +77,8 @@ export const SignIn = () => {
         <Toast ref={toast} />
         <div className="flex justify-content-center flex-wrap card-container yellow-container">
           <Card
-            title="Inicio de Sesión"
+            title="OwnyDrive"
+            subTitle="(beta)"
             className="text-center"
             style={{ width: "100%", maxWidth: "400px" }}
           >
@@ -88,10 +89,11 @@ export const SignIn = () => {
               shape="circle"
               // onClick={(event) => menuRight.current.toggle(event)}
             ></Avatar>
+            <h2>Sign In</h2>
             <form>
               <div className="p-field">
-                <label htmlFor="username">Usuario</label>
                 <InputText
+                  placeholder="Username"
                   id="username"
                   type="text"
                   value={username}
@@ -99,19 +101,19 @@ export const SignIn = () => {
                 />
               </div>
               <div className="p-field">
-                <label htmlFor="email">Email</label>
                 <InputText
+                  placeholder="Email"
                   id="email"
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <Button label="Iniciar Sesión" onClick={handleLogin} />
+              <Button className="mt-4" icon="pi pi-arrow-right" onClick={handleLogin} />
               <Divider />
               <Message
                 severity="info"
-                text="Ingresa tu usuario y correo electrónico."
+                text="Sign in with the credentials given by your OwnyDrive Provider."
               />
             </form>
           </Card>
