@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-teal/theme.css";
@@ -16,19 +16,22 @@ import { AlbumAction } from "./pages/AlbumAction";
 import { Navigation } from "./components/Navigation";
 import axios from "axios";
 import { getToken } from "./services/auth.service";
+import { Page404 } from "./pages/Page404";
+import { Profile } from "./pages/Profile";
 
 function App() {
   const navigate = useNavigate();
-  if (getToken() == "") {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  if (currentPath !== "/" && getToken() === "") {
     navigate("/");
   }
   axios.interceptors.request.use(
     function (response) {
-
       return response;
     },
     function (error) {
-  
       return Promise.reject(error);
     }
   );
@@ -43,8 +46,6 @@ function App() {
     function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
-      console.log(error);
-
       if (error.response.data.message == "You should sign in again") {
         localStorage.clear();
         navigate("/");
@@ -63,6 +64,8 @@ function App() {
         <Route path="/notes/:id" element={<NoteAction />} />
         <Route path="/albums" element={<Albums />} />
         <Route path="/albums/:id" element={<AlbumAction />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </PrimeReactProvider>
   );

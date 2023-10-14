@@ -1,7 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { validateToken } from "../services/auth.service";
 import { Note } from "../components/Note";
 import { Album } from "../components/Album";
 import { getTasks } from "../services/tasks.service";
@@ -12,18 +11,14 @@ export const Home = () => {
   const [albums, setAbums] = useState([]);
 
   useEffect(() => {
-    validateToken().then((v) => {
-      if (v) {
-        setTimeout(() => {
-          getTasks().then((data) => {
-            setNotes(data);
-          });
-          getAlbums().then((data) => {
-            setAbums(data);
-          });
-        }, 1500);
-      }
-    });
+    setTimeout(() => {
+      getTasks().then((data) => {
+        setNotes(data);
+      });
+      getAlbums().then((data) => {
+        setAbums(data);
+      });
+    }, 1500);
   }, []);
 
   return (

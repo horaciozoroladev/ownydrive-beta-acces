@@ -4,6 +4,7 @@ import { Menubar } from "primereact/menubar";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../services/auth.service";
+import { Tooltip } from "primereact/tooltip";
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -66,13 +67,16 @@ export const Navigation = () => {
     </>
   );
   const end = (
-    <Avatar
-      className="cursor-pointer"
-      image="/imgs/avatar_male.jpg"
-      size="xlarge"
-      shape="circle"
-      onClick={(event) => menuRight.current.toggle(event)}
-    ></Avatar>
+    <>
+      <Tooltip target=".pi-question-circle" />
+      <Avatar
+        className="cursor-pointer"
+        image="/imgs/avatar_male.jpg"
+        size="xlarge"
+        shape="circle"
+        onClick={(event) => menuRight.current.toggle(event)}
+      ></Avatar>
+    </>
   );
 
   const menuRight = useRef(null);
@@ -95,7 +99,7 @@ export const Navigation = () => {
   ];
 
   const profile = () => {
-    
+    navigate("/profile");
   };
 
   const handleLogout = () => {
@@ -109,7 +113,7 @@ export const Navigation = () => {
         <div></div>
       ) : (
         <div className="card">
-          <Menubar key={'menubar'} model={items} start={start} end={end} />
+          <Menubar key={"menubar"} model={items} start={start} end={end} />
           <Menu
             key={"menu"}
             model={itemsMenuProfile}
