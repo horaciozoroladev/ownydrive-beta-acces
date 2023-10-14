@@ -17,7 +17,6 @@ export const Navigation = () => {
           label: "New",
           icon: "pi pi-fw pi-plus",
           command: () => {
-            // e.preventDefault();
             navigate("/notes/new");
           },
         },
@@ -25,7 +24,6 @@ export const Navigation = () => {
           label: "View my tasks",
           icon: "pi pi-fw pi-folder-open",
           command: () => {
-            // e.preventDefault();
             navigate("/notes");
           },
         },
@@ -39,7 +37,6 @@ export const Navigation = () => {
           label: "New",
           icon: "pi pi-fw pi-plus",
           command: () => {
-            // e.preventDefault();
             navigate("/albums/new");
           },
         },
@@ -47,7 +44,6 @@ export const Navigation = () => {
           label: "View my albums",
           icon: "pi pi-fw pi-images",
           command: () => {
-            // e.preventDefault();
             navigate("/albums");
           },
         },
@@ -102,7 +98,6 @@ export const Navigation = () => {
     e.preventDefault();
   };
 
-  // handleLogout
   const handleLogout = (e) => {
     localStorage.clear();
     navigate("/");

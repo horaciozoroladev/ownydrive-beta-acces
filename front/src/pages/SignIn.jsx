@@ -57,7 +57,6 @@ export const SignIn = () => {
   };
 
   const cardClassName = classNames(
-    // "bg-signin",
     "pt-4",
     "mt-4",
     "p-d-flex",
@@ -87,7 +86,6 @@ export const SignIn = () => {
               image="/imgs/ownydrive.jpg"
               size="xlarge"
               shape="circle"
-              // onClick={(event) => menuRight.current.toggle(event)}
             ></Avatar>
             <h2>Sign In</h2>
             <form>

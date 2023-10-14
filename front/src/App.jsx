@@ -1,4 +1,3 @@
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { PrimeReactProvider } from "primereact/api";
@@ -19,7 +18,6 @@ import axios from "axios";
 import { getToken } from "./services/auth.service";
 
 function App() {
-  // Add a response interceptor
   const navigate = useNavigate();
   if (getToken() == "") {
     navigate("/");
