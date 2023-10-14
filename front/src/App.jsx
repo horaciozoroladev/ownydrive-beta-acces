@@ -11,7 +11,9 @@ import { SignIn } from "./pages/SignIn";
 import { Home } from "./pages/Home";
 import { SignUp } from "./pages/SignUp";
 import { Notes } from "./pages/Notes";
+import { NoteAction } from "./pages/NoteAction";
 import { Albums } from "./pages/Albums";
+import { AlbumAction } from "./pages/AlbumAction";
 import { Navigation } from "./components/Navigation";
 import axios from "axios";
 import { getToken } from "./services/auth.service";
@@ -60,7 +62,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
         <Route path="/notes" element={<Notes />} />
+        <Route path="/notes/:id" element={<NoteAction />} />
         <Route path="/albums" element={<Albums />} />
+        <Route path="/albums/:id" element={<AlbumAction />} />
       </Routes>
     </PrimeReactProvider>
   );
