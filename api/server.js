@@ -10,10 +10,28 @@ import path from "path"
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import swaggerJSDoc from "swagger-jsdoc"
+import swaggerUI from "swagger-ui-express"
+
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
-console.log(__dirname)
+// console.log(__dirname)
 const __app_dist_dirname = path.join(__dirname, 'public')
-console.log(__app_dist_dirname)
+// console.log(__app_dist_dirname)
+
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "OwnyDrive API",
+            version: '1.0.0',
+        },
+    },
+    apis: ["./routes/custom.routes.js"],
+};
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // Middleware
 app
