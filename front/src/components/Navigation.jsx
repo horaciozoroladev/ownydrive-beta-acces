@@ -94,14 +94,13 @@ export const Navigation = () => {
     },
   ];
 
-  const profile = (e) => {
-    e.preventDefault();
+  const profile = () => {
+    
   };
 
-  const handleLogout = (e) => {
+  const handleLogout = () => {
     localStorage.clear();
     navigate("/");
-    e.preventDefault();
   };
 
   return [

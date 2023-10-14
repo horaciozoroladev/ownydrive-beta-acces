@@ -21,19 +21,13 @@ export const SignIn = () => {
     if (getToken() !== "") {
       navigate("/home");
     }
-  });
+  }, []);
 
   const handleLogin = async (e) => {
     if (username.length != 0 && email.length != 0) {
       login({ username, email })
         .then((res) => {
           localStorage.session = JSON.stringify(res.data);
-          toast.current.show({
-            severity: "success",
-            summary: "Success",
-            detail: "Login successfully",
-            life: 3000,
-          });
           navigate("/home");
         })
         .catch((err) => {
@@ -57,8 +51,8 @@ export const SignIn = () => {
   };
 
   const cardClassName = classNames(
+    "bg-signin",
     "pt-4",
-    "mt-4",
     "p-d-flex",
     "p-jc-center",
     "p-ai-center",
@@ -77,7 +71,7 @@ export const SignIn = () => {
         <div className="flex justify-content-center flex-wrap card-container yellow-container">
           <Card
             title="OwnyDrive"
-            subTitle="(beta)"
+            subTitle="(beta access)"
             className="text-center"
             style={{ width: "100%", maxWidth: "400px" }}
           >
@@ -107,7 +101,11 @@ export const SignIn = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <Button className="mt-4" icon="pi pi-arrow-right" onClick={handleLogin} />
+              <Button
+                className="mt-4"
+                icon="pi pi-arrow-right"
+                onClick={handleLogin}
+              />
               <Divider />
               <Message
                 severity="info"
