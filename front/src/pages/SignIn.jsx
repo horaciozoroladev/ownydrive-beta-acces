@@ -7,6 +7,7 @@ import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
+import { Tooltip } from "primereact/tooltip";
 import { Avatar } from "primereact/avatar";
 import { getToken, login } from "../services/auth.service";
 
@@ -111,6 +112,12 @@ export const SignIn = () => {
                 severity="info"
                 text="Sign in with the credentials given by your OwnyDrive Provider."
               />
+              <Tooltip target=".pi-question-circle" />
+              <i
+                className="mt-4 cursor-pointer pi pi-fw pi-question-circle text-xl"
+                data-pr-position="bottom"
+                data-pr-tooltip="OwnyDrive it's a Cloud platform synchronized by your email account to store any task and photo albums 😱"
+              ></i>
             </form>
           </Card>
         </div>
